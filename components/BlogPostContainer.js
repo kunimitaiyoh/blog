@@ -1,8 +1,8 @@
+import { BodyRenderer, createApp, query, withPhenomicApi } from "@phenomic/preset-react-app/lib/client";
 import React from "react";
 import { Link } from "react-router";
-import { BodyRenderer } from "@phenomic/preset-react-app/lib/client";
 
-export default ({ isLoading, page }) => (
+const component = ({ isLoading, page }) => (
   <div>
     { isLoading && "Loading..." }
     { !isLoading &&
@@ -17,3 +17,7 @@ export default ({ isLoading, page }) => (
     </footer>
   </div>
 );
+
+export default withPhenomicApi(component, props => ({
+  page: query({ path: "content/posts", id: props.params.splat }),
+}));
