@@ -1,3 +1,8 @@
+---
+title: "First post"
+date: "2017-01-01"
+---
+
 # This is a [Markdown](https://en.wikipedia.org/wiki/Markdown#Example) file
 
 If you are new to Markdown, you might want to check those links:

@@ -1,11 +1,48 @@
 import { createApp, query, withPhenomicApi } from "@phenomic/preset-react-app/lib/client";
+import React from "react";
+import { Link } from "react-router";
 
-const component = () => (
+const component = ({ isLoading, posts }) => (
   <div>
-    <p>This is a homepage</p>
+    <h1>Home</h1>
+    { isLoading && "Loading..." }
+    { !isLoading && (
+      <div>
+        <div>
+          { posts.node &&
+            posts.node.previous && (
+              <Link to={ posts.node.previousPageIsFirst ? `/` : `/after/${posts.node.previous}/` } >
+                Newer posts
+              </Link>
+            )}
+        </div>
+        <ul>
+          { posts &&
+            posts.node &&
+            posts.node.list &&
+            posts.node.list.map(post => (
+              <li key={post.id}>
+                <Link to={ `/blog/${post.id}/` }>{ post.title || post.id }</Link>
+              </li>
+            )) }
+
+        </ul>
+        <div>
+          { posts.node &&
+            posts.node.next && (
+              <Link to={`/after/${posts.node.next}/`}>Older posts</Link>
+          )}
+        </div>
+      </div>
+
+    )}
   </div>
 );
 
-export default withPhenomicApi(component, () => ({
-  posts: query({ path: "content/posts" }),
+export default withPhenomicApi(component, props => ({
+  posts: query({
+    path: "content/posts",
+    limit: 2,
+    after: props.params.after
+  }),
 }));
