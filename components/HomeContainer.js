@@ -7,34 +7,31 @@ const component = ({ isLoading, posts }) => (
     <h1>Home</h1>
     { isLoading && "Loading..." }
     { !isLoading && (
-      <div>
+      posts &&
+      posts.node && (
         <div>
-          { posts.node &&
-            posts.node.previous && (
-              <Link to={ posts.node.previousPageIsFirst ? `/` : `/after/${posts.node.previous}/` } >
-                Newer posts
-              </Link>
+          <div>
+            { posts.node.previous && (
+                <Link to={ posts.node.previousPageIsFirst ? `/` : `/after/${posts.node.previous}/` } >
+                  Newer posts
+                </Link>
+              )}
+          </div>
+          <ul>
+            { posts.node.list &&
+              posts.node.list.map(post => (
+                <li key={post.id}>
+                  <Link to={ `/blog/${post.id}/` }>{ post.title || post.id }</Link>
+                </li>
+              )) }
+          </ul>
+          <div>
+            { posts.node.next && (
+                <Link to={`/after/${posts.node.next}/`}>Older posts</Link>
             )}
+          </div>
         </div>
-        <ul>
-          { posts &&
-            posts.node &&
-            posts.node.list &&
-            posts.node.list.map(post => (
-              <li key={post.id}>
-                <Link to={ `/blog/${post.id}/` }>{ post.title || post.id }</Link>
-              </li>
-            )) }
-
-        </ul>
-        <div>
-          { posts.node &&
-            posts.node.next && (
-              <Link to={`/after/${posts.node.next}/`}>Older posts</Link>
-          )}
-        </div>
-      </div>
-
+      )
     )}
   </div>
 );
