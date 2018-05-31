@@ -1,9 +1,14 @@
 import { createApp, query, withPhenomicApi } from "@phenomic/preset-react-app/lib/client";
 import React from "react";
+import Head from "react-helmet";
 import { Link } from "react-router";
 
 const component = ({ isLoading, posts }) => (
   <div>
+    <Head>
+      <title>Home</title>
+      <meta name="description" content="Blog" />
+    </Head>
     <h1>Home</h1>
     { isLoading && "Loading..." }
     { !isLoading && (

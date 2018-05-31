@@ -8,6 +8,10 @@ const component = ({ isLoading, page }) => (
     { !isLoading &&
       page.node && (
         <article>
+          <Head>
+            <title>{ page.node.title } - Blog</title>
+            <meta name="description" content="Blog" />
+          </Head>
           <h1>{ page.node.title }</h1>
           <BodyRenderer>{ page.node.body }</BodyRenderer>
         </article>
