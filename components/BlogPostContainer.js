@@ -1,9 +1,10 @@
 import { BodyRenderer, createApp, query, withPhenomicApi } from "@phenomic/preset-react-app/lib/client";
 import React from "react";
 import { Link } from "react-router";
+import Layout from "./Layout";
 
 const component = ({ isLoading, page }) => (
-  <div>
+  <Layout>
     { isLoading && "Loading..." }
     { !isLoading &&
       page.node && (
@@ -19,7 +20,7 @@ const component = ({ isLoading, page }) => (
     <footer>
       <Link to="/">Go to home</Link>
     </footer>
-  </div>
+  </Layout>
 );
 
 export default withPhenomicApi(component, props => ({

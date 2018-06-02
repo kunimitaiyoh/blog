@@ -2,9 +2,10 @@ import { createApp, query, withPhenomicApi } from "@phenomic/preset-react-app/li
 import React from "react";
 import Head from "react-helmet";
 import { Link } from "react-router";
+import Layout from "./Layout";
 
 const component = ({ isLoading, posts }) => (
-  <div>
+  <Layout>
     <Head>
       <title>Home</title>
       <meta name="description" content="Blog" />
@@ -38,7 +39,7 @@ const component = ({ isLoading, posts }) => (
         </div>
       )
     )}
-  </div>
+  </Layout>
 );
 
 export default withPhenomicApi(component, props => ({
